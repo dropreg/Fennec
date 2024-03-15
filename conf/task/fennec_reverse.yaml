@@ -1,0 +1,19 @@
+
+task_func:
+  pairwise_eval_func:
+    - fennec_reverse_branch
+    - fennec_reverse_scoring
+
+train_parquet_file: data/eval_file/fennec_reverse_autoj.jsonl
+
+actions:
+  fennec_reverse_branch:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_reverse_template.json"
+  fennec_reverse_scoring:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_reverse_template.json"

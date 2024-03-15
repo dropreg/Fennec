@@ -1,0 +1,61 @@
+{
+  "en": {
+    "zephyr": {
+      "system": "You are a helpful assistant.",
+      "instruction": "You are assessing two submitted responses on a given user's query and judging which response is better or they are tied. Here is the data:\n\n[BEGIN DATA]",
+      "query": "\n***\n[Query]: {query}",
+      "response_a": "\n***\n[Response 1]: {response}", 
+      "response_b": "\n***\n[Response 2]: {response}", 
+      "format": "\n***\n[END DATA]\n\nHere are the instructions to assess and compare the two responses:\n\n1. Pinpoint the key factors to distinguish these two responses.\n2. Conclude your comparison by providing a final decision on which response is better, or they are tied. Begin your final decision statement with \"So, the final decision is Response 1 / Response 2 / Tie\". Ensure that your decision aligns coherently with the comprehensive evaluation and comparison you've provided."
+    },
+    "zephyr_autoj": {
+      "system": "You are a helpful assistant.",
+      "instruction": "You are assessing two submitted responses on a given user's query and judging which response is better or they are tied. Here is the data:\n\n[BEGIN DATA]",
+      "query": "\n***\n[Query]: {query}",
+      "response_a": "\n***\n[Response 1]: {response}", 
+      "response_b": "\n***\n[Response 2]: {response}", 
+      "format": "\n***\n[END DATA]\n\nHere are the instructions to assess and compare the two responses:\n\n1. Pinpoint the key factors to distinguish these two responses.\n2. Conclude your comparison by providing a final decision on which response is better, or they are tied. Begin your final decision statement with \"So, the final decision is Response 1 / Response 2 / Tie\". Ensure that your decision aligns coherently with the comprehensive evaluation and comparison you've provided."
+    },
+    "autoj": {
+      "system": "You are a helpful assistant.",
+      "instruction": "You are assessing two submitted responses on a given user's query and judging which response is better or they are tied. Here is the data:\n\n[BEGIN DATA]",
+      "query": "\n***\n[Query]: {query}",
+      "response_a": "\n***\n[Response 1]: {response}", 
+      "response_b": "\n***\n[Response 2]: {response}", 
+      "format": "\n***\n[END DATA]\n\nHere are the instructions to assess and compare the two responses:\n\n1. Pinpoint the key factors to distinguish these two responses.\n2. Conclude your comparison by providing a final decision on which response is better, or they are tied. Begin your final decision statement with \"So, the final decision is Response 1 / Response 2 / Tie\". Ensure that your decision aligns coherently with the comprehensive evaluation and comparison you've provided."
+    },
+    "zephyr_judgelm": {
+      "system": "",
+      "instruction": "Given a [User Query], please score the responses (1 and 2) from two AI assistants. Ensure a comparative and objective assessment, aiming to identify deficiencies in the response content. Provide a final score of 1-10 along with relevant explanations.",
+      "query": "\n***\n[User Query]:\n{query}",
+      "response_a": "\n***\n[The Start of Response 1]:\n{response}\n[The End of Response 1]", 
+      "response_b": "\n***\n[The Start of Response 2]:\n{response}\n[The End of Response 2]", 
+      "format": "\n***\nPlease return [Judge Result]:\n"
+    },
+    "zephyr_fennec_judgelm": {
+      "system": "You are a fair, faithful, and helpful content evaluation assistant.",
+      "instruction": "Given a [User Query], please score the responses (1 and 2) from two AI assistants. Ensure a comparative and objective assessment, aiming to identify deficiencies in the response content. Provide a final score of 1-10 along with relevant explanations.",
+      "query": "\n***\n[User Query]:\n{query}",
+      "response_a": "\n***\n[The Start of Response 1]:\n{response}\n[The End of Response 1]",
+      "response_b": "\n***\n[The Start of Response 2]:\n{response}\n[The End of Response 2]",
+      "format": "\n***\nPlease return [Judge Result]:\n"
+    },
+    "judgelm": {
+      "system": "You are a helpful and precise assistant for checking the quality of the answer.\n",
+      "instruction": "[System]\nWe would like to request your feedback on the performance of two AI assistants in response to the user question displayed above.\nPlease rate the helpfulness, relevance, accuracy, level of details of their responses. Each assistant receives an overall score on a scale of 1 to 10, where a higher score indicates better overall performance.\nPlease first output a single line containing only two values indicating the scores for Assistant 1 and 2, respectively. The two scores are separated by a space. In the subsequent line, please provide a comprehensive explanation of your evaluation, avoiding any potential bias and ensuring that the order in which the responses were presented does not affect your judgment.\n\n",
+      "query": "[Question]\n{query}\n\n",
+      "response_a": "[The Start of Assistant 1's Answer]\n{response}\n\n[The End of Assistant 1's Answer]\n\n",
+      "response_b": "[The Start of Assistant 2's Answer]\n{response}\n\n[The End of Assistant 2's Answer]\n\n", 
+      "format": "### Response:\n"
+    },
+    "one_chat": {
+      "system": "You are a helpful and precise assistant for checking the quality of the answer.\n",
+      "instruction": "[System]\nWe would like to request your feedback on the performance of two AI assistants in response to the user question displayed above.\nPlease rate the helpfulness, relevance, accuracy, level of details of their responses. Each assistant receives an overall score on a scale of 1 to 10, where a higher score indicates better overall performance.\nPlease first output a single line containing only two values indicating the scores for Assistant 1 and 2, respectively. The two scores are separated by a space. In the subsequent line, please provide a comprehensive explanation of your evaluation, avoiding any potential bias and ensuring that the order in which the responses were presented does not affect your judgment.\n\n",
+      "query": "[Question]\n{query}\n\n",
+      "response_a": "[The Start of Assistant 1's Answer]\n{response}\n\n[The End of Assistant 1's Answer]\n\n",
+      "response_b": "[The Start of Assistant 2's Answer]\n{response}\n\n[The End of Assistant 2's Answer]\n\n", 
+      "format": "### Response:\n"
+    }
+  },
+  "zh": {}
+}

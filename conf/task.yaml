@@ -1,0 +1,22 @@
+
+
+single_eval:
+  config_file: conf/task/single_eval.yaml
+
+pairwise_eval:
+  config_file: conf/task/pairwise_eval.yaml
+
+bsm_eval:
+  config_file: conf/task/bsm_eval.yaml
+
+fennec:
+  config_file: conf/task/fennec.yaml
+
+fennec_reverse:
+  config_file: conf/task/fennec_reverse.yaml
+
+prometheus_eval:
+  config_file: conf/task/prometheus_eval.yaml
+
+tool_awareness_eval:
+  config_file: conf/task/tool_awareness_eval.yaml

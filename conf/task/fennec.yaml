@@ -1,0 +1,54 @@
+
+task_func:
+  pairwise_gen_func:
+    - fennec_branch
+    - fennec_scoring
+    - fennec_pairwise_solving
+    - fennec_correction
+  pairwise_eval_func:
+    - fennec_branch
+    - fennec_scoring
+    - fennec_pairwise_solving
+    - fennec_pairwise_merge
+    - fennec_correction
+  pairwise_single_eval_func:
+    - fennec_branch
+    - fennec_scoring
+    - fennec_pairwise_single_solving
+    - fennec_pairwise_merge
+    - fennec_correction
+
+train_parquet_file: data/eval_file/train.parquet
+train_filter_parquet_file: data/eval_file/filter.jsonl
+
+actions:
+  fennec_branch:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_template.json"
+  fennec_scoring:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_template.json"
+  fennec_pairwise_solving:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_template.json"
+  fennec_pairwise_merge:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_template.json"
+  fennec_correction:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_template.json"
+  fennec_pairwise_single_solving:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_template.json"

@@ -1,0 +1,21 @@
+
+
+task_func:
+  single_eval_func:
+    - single_scoring
+  pairwise_single_eval_func:
+    - pairwise_single_scoring
+
+eval_json: data/eval_file/prometheus_eval_noref.parquet
+
+actions:
+  single_scoring:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/prometheus_eval_template.json"
+  pairwise_single_scoring:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/prometheus_eval_template.json"

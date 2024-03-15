@@ -1,0 +1,17 @@
+{
+  "en": {
+    "zephyr_fennec_reverse": {
+      "system": "You are a fair, faithful, and helpful content evaluation assistant.",
+      "reverse_branch": "Given a [User Query] and the subsequent responses (A and B) provided by two AI assistants, along with an in-depth and impartial [Evaluation Result] of these responses, please formulate an [Evaluation Criterion] that demonstrates a high correlation with the relevance of the user's query and assistant's responses.\n***\n[User Query]:\n{query}\n***\n[The Start of Response A]:\n{response1}\n[The End of Response A]\n***\n[The Start of Response B]:\n{response2}\n[The End of Response B]\n***\n[The Start of Evaluation Result]:\n{result}\n[The End of Evaluation Result]\n***\nPlease return [Evaluation Criterion]:\n",
+      "reverse_scoring": "Given a [User Query] and the subsequent responses (A and B) provided by two AI assistants, along with a comprehensive and unbiased [Evaluation Criteria] and [Evaluation Result] for these responses. Please contemplate and summarize the scoring scales associated with these [Evaluation Results] to develop a rational and highly relevant [Scoring Guideline].\n***\n[User Query]:\n{query}\n***\n[Evaluation Criteria]:\n{criteria}\n***\n[The Start of Response A]:\n{response1}\n[The End of Response A]\n***\n[The Start of Response B]:\n{response2}\n[The End of Response B]\n***\n[The Start of Evaluation Result]:\n{result}\n[The End of Evaluation Result]\n***\nPlease return [Scoring Guideline]:\n",
+      "single_reverse_branch": "Given a [User Query] and the subsequent responses provided by AI assistants, along with an in-depth and impartial [Evaluation Result] of these responses, please formulate an [Evaluation Criterion] that demonstrates a high correlation with the relevance of the user's query and assistant's responses.\n***\n[User Query]:\n{query}\n***\n[The Start of Response]:\n{response}\n[The End of Response]\n***\n[The Start of Evaluation Result]:\n{result}\n[The End of Evaluation Result]\n***\nPlease return [Evaluation Criterion]:\n",
+      "single_reverse_scoring": "Given a [User Query] and the subsequent responses provided by AI assistants, along with a comprehensive and unbiased [Evaluation Criteria] and [Evaluation Result] for these responses. Please contemplate and summarize the scoring scales associated with these [Evaluation Results] to develop a rational and highly relevant [Scoring Guideline].\n***\n[User Query]:\n{query}\n***\n[Evaluation Criteria]:\n{criteria}\n***\n[The Start of Response]:\n{response}\n[The End of Response]\n***\n[The Start of Evaluation Result]:\n{result}\n[The End of Evaluation Result]\n***\nPlease return [Scoring Guideline]:\n"
+    }
+  },
+  "zh": {}
+}
+
+
+
+
+

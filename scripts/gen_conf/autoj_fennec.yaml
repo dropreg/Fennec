@@ -1,0 +1,20 @@
+
+
+# Dialogue Config
+dialogue_conf: conf/benchmark.yaml
+dialogue: autoj_bench
+dialogue_dataset: pairwise_train
+
+# Server Config
+server_conf: conf/server.yaml
+server: gpt
+model_id: one_chat
+
+# Task Config
+task_conf: conf/task.yaml
+task: fennec
+task_func: pairwise_gen_func
+
+# Eval Config
+eval_func: "generation"
+eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_{model_id}_{task_func}.sqlite

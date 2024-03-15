@@ -1,0 +1,23 @@
+{
+  "en": {
+    "zephyr": {
+      "system": "You are a helpful assistant.",
+      "instruction": "[Instruction]\nPlease act as an impartial judge and evaluate the quality of the response provided by an AI assistant to the user question displayed below. Your evaluation should consider factors such as the helpfulness, relevance, accuracy, depth, creativity, and level of detail of the response. Begin your evaluation by providing a short explanation. Be as objective as possible.\n\n",
+      "query": "[Question]\n{query}\n\n",
+      "response": "[The Start of Assistant\"s Answer]\n{response}[The End of Assistant\"s Answer]\n\n",
+      "format": "[Response Format] After providing your explanation, you must rate the response on a scale of 1 to 5 by strictly following this format: '[[rating]]', for example: 'Rating: [[5]]'.\n\n"
+    },
+    "prometheus": {
+      "system": "",
+      "instruction": "###Task Description: An instruction (might include an Input inside it), a response to evaluate, a reference answer that gets a score of 5, and a score rubric representing a evaluation criteria are given. 1. Write a detailed feedback that assess the quality of the response strictly based on the given score rubric, not evaluating in general. 2. After writing a feedback, write a score that is an integer between 1 and 5. You should refer to the score rubric. 3. The output format should look as follows: 'Feedback: (write a feedback for criteria) [RESULT] (an integer number between 1 and 5)' 4. Please do not generate any other opening, closing, and explanations.",
+      "history": "###The History: #[User Question]\n{query}\n#[Assistant\"s Answer]\n{response}\n",
+      "query": "###The instruction to evaluate: {query}\n",
+      "response": "###Response to evaluate: {response}\n",
+      "reference": "###Reference Answer (Score 5): {reference}\n",
+      "score": "{score}",
+      "score_candi": "[Does the model's response offer direct, pertinent, and valuable information that actively assists the user's query or concern in a dialogue? The response should align with the user's needs and offer proactive suggestions or advice, if applicable.]\nScore 1: The model's response is completely off-topic and offers no helpful information or direction in relation to the user's query or concern.\nScore 2: The model's response vaguely addresses the user's query, but it lacks depth, clarity, or relevance, necessitating the user to seek further clarification.\nScore 3: The model's response addresses the user's query, but misses certain key aspects or does not provide additional helpful insights that might be relevant to the user.\nScore 4: The model's response effectively addresses the user's query, providing pertinent information. It might offer some proactive suggestions, but might not cover all potential insights or advice.\nScore 5: The model's response perfectly addresses the user's query, offering direct, comprehensive, and pertinent information. It anticipates further questions and provides proactive suggestions or advice, fully aligning with the user's needs.\n",
+      "format": "###Feedback:\n"
+    }
+  },
+  "zh": {}
+}

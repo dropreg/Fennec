@@ -1,0 +1,13 @@
+
+task_func:
+  pairwise_eval_func:
+    - pairwise_comparing
+
+eval_json: data/eval_file/pairwise_eval.jsonl
+
+actions:
+  pairwise_comparing:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/pairwise_eval_template.json"

@@ -1,0 +1,22 @@
+
+
+task_func:
+  single_eval_func:
+    - scenario_judge
+  demon_eval_func:
+    - generate_demon
+    - scenario_judge
+
+eval_json: data/eval_file/temp.jsonl
+
+actions:
+  scenario_judge:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/tool_awareness_eval_template.json"
+  generate_demon:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/tool_awareness_eval_template.json"

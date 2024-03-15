@@ -1,0 +1,20 @@
+
+
+# Dialogue Config
+dialogue_conf: conf/benchmark.yaml
+dialogue: mt_bench
+dialogue_dataset: pairwise_test_turn0
+
+# Server Config
+server_conf: conf/server.yaml
+server: vllm
+model_id: fennec
+
+# Task Config
+task_conf: conf/task.yaml
+task: fennec
+task_func: pairwise_eval_func
+
+# Eval Config
+eval_func: "evaluation"
+eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_{model_id}_{task_func}.sqlite

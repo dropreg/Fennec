@@ -1,0 +1,23 @@
+{
+  "en": {
+    "zephyr": {
+      "system": "You are a helpful assistant.",
+      "instruction": "[Instruction]\nPlease act as an impartial judge and evaluate the quality of the response provided by an AI assistant to the user question displayed below. Your evaluation should consider factors such as the helpfulness, relevance, accuracy, depth, creativity, and level of detail of the response. Begin your evaluation by providing a short explanation. Be as objective as possible.\n\n",
+      "query": "[Question]\n{query}\n\n",
+      "response": "[The Start of Assistant\"s Answer]\n{response}[The End of Assistant\"s Answer]\n\n",
+      "format": "[Response Format] After providing your explanation, you must rate the response on a scale of 1 to 5 by strictly following this format: '[[rating]]', for example: 'Rating: [[5]]'.\n\n"
+    },
+    "prometheus": {
+      "system": "You are a fair evaluator language model.",
+      "instruction": "###Task Description: An instruction (might include an Input inside it), a response to evaluate, a reference answer that gets a score of 5, and a score rubric representing a evaluation criteria are given. 1. Write a detailed feedback that assess the quality of the response strictly based on the given score rubric, not evaluating in general. 2. After writing a feedback, write a score that is an integer between 1 and 5. You should refer to the score rubric. 3. The output format should look as follows: 'Feedback: (write a feedback for criteria) [RESULT] (an integer number between 1 and 5)' 4. Please do not generate any other opening, closing, and explanations.",
+      "history": "###The History: #[User Question]\n{query}\n#[Assistant\"s Answer]\n{response}\n",
+      "query": "###The instruction to evaluate: {query}\n",
+      "response": "###Response to evaluate: {response}\n",
+      "reference": "###Reference Answer (Score 5): {reference}\n",
+      "score": "{score}",
+      "score_candi": "###Score Rubrics:\n[Did the model extract pertinent and accurate background knowledge without any misinformation when factual knowledge retrieval is needed? Is the response supported by reliable evidence or citation of the source of its information?]\nScore 1: The model did not extract pertinent background knowledge and provided inaccurate or misleading information. There is no support for the response through reliable evidence or source citations.\nScore 2: The model extracted some relevant background knowledge but included inaccuracies or incomplete information. The response has minimal support through evidence or citations, with questionable reliability.\nScore 3: The model extracted generally accurate and pertinent background knowledge, with minor inaccuracies or omissions. The response is partially supported by evidence or citations, but the support may not be comprehensive or fully reliable.\nScore 4: The model extracted mostly accurate and relevant background knowledge but missed minor evidence or citations to support the response.\nScore 5: The model extracted complete and accurate background knowledge without any misinformation. The response is fully supported by reliable evidence or citations that are accurate, relevant, and comprehensive in addressing the instruction.\n\n###Feedback: \",\n",
+      "format": ""
+    }
+  },
+  "zh": {}
+}

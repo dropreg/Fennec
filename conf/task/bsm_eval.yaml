@@ -1,0 +1,44 @@
+
+task_func:
+  pairwise_bsm_eval_func:
+    - bsm_branch
+    - bsm_pairwise_solving
+    - bsm_pairwise_merge
+  single_bsm_eval_func:
+    - bsm_single_branch
+    - bsm_single_solving
+    - bsm_single_merge
+
+eval_json: data/eval_file/bsm_eval.jsonl
+
+actions:
+  bsm_branch:
+    name: ""
+    description: "It is parameterized with specific prompts to the base LLM."
+    lang: en
+    template_file: "conf/prompt_template/bsm_eval_template.json"
+  bsm_pairwise_solving:
+    name: ""
+    description: "It is parameterized with specific prompts to the base LLM."
+    lang: en
+    template_file: "conf/prompt_template/bsm_eval_template.json"
+  bsm_pairwise_merge:
+    name: ""
+    description: "It is parameterized with specific prompts to the base LLM."
+    lang: en
+    template_file: "conf/prompt_template/bsm_eval_template.json"
+  bsm_single_branch:
+    name: ""
+    description: "It is parameterized with specific prompts to the base LLM."
+    lang: en
+    template_file: "conf/prompt_template/bsm_eval_template.json"
+  bsm_single_solving:
+    name: ""
+    description: "It is parameterized with specific prompts to the base LLM."
+    lang: en
+    template_file: "conf/prompt_template/bsm_eval_template.json"
+  bsm_single_merge:
+    name: ""
+    description: "It is parameterized with specific prompts to the base LLM."
+    lang: en
+    template_file: "conf/prompt_template/bsm_eval_template.json"

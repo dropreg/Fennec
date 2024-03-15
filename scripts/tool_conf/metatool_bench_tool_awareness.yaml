@@ -1,0 +1,19 @@
+
+# Dialogue Config
+dialogue_conf: conf/benchmark.yaml
+dialogue: metatool_bench
+dialogue_dataset: tool_awareness
+
+# Server Config
+server_conf: conf/server.yaml
+server: vllm
+model_id: mistral
+
+# Task Config
+task_conf: conf/task.yaml
+task: tool_awareness_eval
+task_func: single_eval_func
+
+# Eval Config
+eval_func: "evaluation"
+eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_{model_id}_{task_func}_3.sqlite

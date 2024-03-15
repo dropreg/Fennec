@@ -1,0 +1,21 @@
+
+
+task_func:
+  single_eval_func:
+    - single_scoring
+  pairwise_single_eval_func:
+    - pairwise_single_scoring
+
+eval_json: data/eval_file/single_eval.jsonl
+
+actions:
+  single_scoring:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/single_eval.json"
+  pairwise_single_scoring:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/single_eval.json"
