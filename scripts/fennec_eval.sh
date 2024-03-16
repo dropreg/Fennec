@@ -16,5 +16,5 @@
 
 
 python src/auto_eval.py \
--c scripts/tool_conf/metatool_bench_tool_awareness.yaml \
-# -a -p 64 \
+-c scripts/gen_conf/fennec_bench_v2_gen.yaml \
+-a -p 64 \

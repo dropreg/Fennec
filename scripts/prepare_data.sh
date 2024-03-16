@@ -9,4 +9,6 @@
 
 # python src/prepare_bench.py -c conf/benchmark.yaml -b system_rank
 
-python src/prepare_bench.py -c conf/benchmark.yaml -b metatool_bench
+# python src/prepare_bench.py -c conf/benchmark.yaml -b metatool_bench
+
+python src/prepare_bench.py -c conf/benchmark.yaml -b fennec_bench_v2

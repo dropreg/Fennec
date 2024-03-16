@@ -8,6 +8,8 @@ bench_candidates:
 - correction_bench
 - system_rank
 - metatool_bench
+- fennec_bench_v2
+
 
 autoj_bench:
   name: "autoj_bench"
@@ -92,3 +94,14 @@ metatool_bench:
       raw_file: data/fennec_eval_data/raw/metatool/Task1.json
       format_file: data/fennec_eval_data/format/metatool/testdata_tool_awareness.jsonl
       db_file: data/db_file/dialogue/tool_awareness_testdata_single.sqlite
+
+fennec_bench_v2:
+  name: "fennec_bench_v2"
+  domain: ""
+  description: ""
+  datasets:
+   dialogue_gen:
+      type: single
+      raw_file: data/fennec_train_data/raw/fennec_bench_v2/selected_data_0314.jsonl
+      format_file: data/fennec_train_data/format/fennec_bench_v2/traindata_0314.jsonl
+      db_file: data/db_file/dialogue/fennec_bench_v2_traindata_0314_single.sqlite

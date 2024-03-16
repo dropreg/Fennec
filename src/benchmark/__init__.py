@@ -7,3 +7,4 @@ from .reverse_autoj_bench import *
 from .correction_bench import *
 from .system_rank import *
 from .metatool_bench import *
+from .fennec_bench_v2 import *

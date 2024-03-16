@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# MODEl_NAME=/public/home/ljt/lxb/hf_lfs/zephyr-7b-beta
-MODEl_NAME=/public/home/ljt/hf_models/Llama-2-13b-chat-hf
+MODEl_NAME=/public/home/ljt/lxb/hf_lfs/zephyr-7b-beta
+# MODEl_NAME=/public/home/ljt/hf_models/Llama-2-13b-chat-hf
 # MODEl_NAME=/public/home/ljt/hf_models/Llama-2-7b-chat-hf
 # MODEl_NAME=/public/home/ljt/lxb/hf_lfs/Mistral-7B-Instruct-v0.2
 

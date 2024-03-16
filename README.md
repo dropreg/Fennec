@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="fennec_logo.png" width=256px>
+  <img src="fennec_logo2.png" width=256px>
 </p>
 
 <h1 align="center"> Fennec: Fine-grained Language Model Evaluation and Correction Extended through Branching and Bridging </h1>

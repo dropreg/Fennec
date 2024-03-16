@@ -20,3 +20,6 @@ prometheus_eval:
 
 tool_awareness_eval:
   config_file: conf/task/tool_awareness_eval.yaml
+
+dialogue_gen:
+  config_file: conf/task/dialogue_gen.yaml

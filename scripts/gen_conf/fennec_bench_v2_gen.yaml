@@ -1,0 +1,20 @@
+
+
+# Dialogue Config
+dialogue_conf: conf/benchmark.yaml
+dialogue: fennec_bench_v2
+dialogue_dataset: dialogue_gen
+
+# Server Config
+server_conf: conf/server.yaml
+server: vllm
+model_id: zephyr
+
+# Task Config
+task_conf: conf/task.yaml
+task: dialogue_gen
+task_func: gen_func
+
+# Eval Config
+eval_func: "generation"
+eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_{model_id}_{task_func}.sqlite

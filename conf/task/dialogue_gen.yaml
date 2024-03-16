@@ -1,0 +1,11 @@
+
+task_func:
+  gen_func:
+    - dialogue_gen
+
+actions:
+  dialogue_gen:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_template.json"
