@@ -2,81 +2,80 @@
   <img src="fennec_logo2.png" width=256px>
 </p>
 
-<h1 align="center"> Fennec: Fine-grained Language Model Evaluation and Correction Extended through Branching and Bridging </h1>
+<h1 align="center"> Fennec </h1>
 
-## Table of contents
+**Fennec** is a tool designed for automating the evaluation of conversational data, offering judgements across multiple dimensions and granularities. 
 
-- [Introduction](#Introduction)
-- [Quick Start](#quick-start)
-  - [Setup](#setup)
-  - [Model](#model)
-  - [Usage](#usage)
-- [Data](#data)
-  - [Training Data](#training-data)
-  - [Evaluation Benchmark](#evaluation-benchmark)
+**Fennec** aim is to address two key challenges:
 
-## Introduction
++ *Multidimensional Evaluation*: providing comprehensive or accurate responses to multi-intent queries.
++ *Scaling Evaluation Capabilities*: extending evaluation abilities to encompass a wider array of scenarios and usage examples.
 
-Fennec 可以针对 “对话数据” 进行有效评估。
+## 🎫 Approach
+<div style="text-align:center;">
+    <img src="fennec_overview.png" alt="Approach" width="400" height="250">
+</div>
 
-| 这里的对话数据是指为了解决 “复杂的人类意图为目的” 的对话数据，而非 “闲聊性” 对话。
+**Fennec** provides a step-by-step framework designed for evaluating conversational responses using a *Branching* mechanism.
 
-## Quick start
+1. *Evaluation Criteria*: Offers users multiple evaluation dimensions for their queries.
+2. *Scoring Guidelines*: Extends scoring rules (1-5 points) for each scoring dimension.
+3. *Judgements*: Scores based on evaluation criteria and scoring guidelines.
+4. *Correction*: Addresses issues identified within the conversations accordingly.
 
-当前代码库中包括了如何对评估模型的 “构建训练数据” 和 “推理” 的功能。
 
-### Setup
+## 🧱 Available Resource
 
-### Usage
+| Model | Parameters | Datasets | Agreement ⬆ | Consistency ⬆ |
+|:---:|:---:|:---:|:---:|:---:|
+| GPT-4 | - | - | 62.28 | 86.28 |
+| GPT-3.5 | - | - | 42.74 | 62.43 |
+| Auto-J | 13B | Auto-J | 54.96 | 83.41 |
+| Fennec | 7B | Fennec | 56.63 | 86.32 |
+| Fennec | 7B | Fennec-bridging | 57.40 | 87.00 |
 
-通过 Vllm 可以直接运行评估模型服务，然后通过Post请求的方式来执行推理。
+## 🧩 Setup
 
-```bash
-bash scripts/run_vllm_server.sh
-bash scripts/fennec_eval.sh
-```
+1. The current version has minimal third-party dependencies:
 
-Fennec 支持多种推理模式，并且通过配置文件的的方式来进行管理：
+    ```bash
+    pip install SQLAlchemy # Utilized for data caching.
+    pip install scikit-learn # Employed for computing evaluation metrics.
+    pip install loguru # logging functionalities.
+    ```
 
-+ fennec 针对对话数据进行评估，并依次生成：“评估标准”、“打分指导”、“评判结果”、并针对低分的内容进行修正。
-+ fennec_reverse 为开源数据中的 “评判结果” 生成相应的 “评估标准” 和 “打分指导”。
-+ single_eval 通过为 “单个回复” 提供判决结果。
-+ pairwise_eval 通过为 “成对回复” 提供判决结果。
-+ prometheus_eval 评估模型 Prometheus。
-+ bsm_eval 评估模型 BSM。
+2. **Fennec** utilizes [vLLM](https://github.com/vllm-project/vllm) to launch inference services, currently supporting version >= 0.2.1.
 
-## Data
+    ```bash
+    pip install vllm
+    ```
 
-Fennec 可以从头构建数据包括以下来源：[benchmark.yaml](conf/benchmark.yaml)
+    or build from source:
+    ```bash
+    git clone https://github.com/vllm-project/vllm.git
+    cd vllm
+    pip install -e .
+    ```
 
-+ autoj_bench 使用 Auto-J 中数据进行训练模型和进行相应评估。
+## 🎮 Usage
 
-```bash
-bash scripts/download.sh
-python src/prepare_bench.py -c conf/benchmark.yaml -b autoj_bench
-```
+Using **Fennec** involves two steps:
 
-### Training Data
+1. Launching vLLM server for Fennec evaluation:
 
-Fennec Dataset
+    ```bash
+    python scripts/run_vllm_server.sh
+    ```
+    > + EVAL_PARALLEL: allows for inference on multiple GPU resources concurrently when available. 
+    > + MODEl_NAME: the address where the downloaded model is stored.
+2. Evaluating benchmark dataset (or custom dataset):
+    ```bash
+    python scripts/fennec_eval.sh
+    ```
+    > -a -p {number}: execute parallel inference and specify the {number}.
 
-Fennec-Bridging Dataset
+We provide more detailed [Recipes](Recipes.md) on how to use the current repo.
 
-### Evaluation Benchmark
+## ☕ More
 
-Auto-J
-
-PandaLM
-
-MT-Bench Human Judgment (Turn0)
-
-Correction
-
-System Rank
-
-TODO:
-
-1. 通过构建不同难度的数据来考察模型训练能力的区别：如果没有见过低分的回复，能否给出准确的回答。收集数据
-2. 针对 response 来找合适关系。
-4. 扩展数据大小、轮数、领域数据。
 
