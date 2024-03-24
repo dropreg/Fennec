@@ -19,7 +19,7 @@ class VllmServer(Server):
             from openai import OpenAI
 
             self.client = OpenAI(
-                api_key=self.config["api_key"],
+                api_key=self.config["api_key"] if "api_key" in self.config.keys() else "EMPTY",
                 base_url=self.config["api_url"],
             )
         else:
@@ -61,7 +61,7 @@ class VllmServer(Server):
         }
         
         header = {"Content-Type": "application/json"}
-        port = random.choice(["8000", "8001", "8002","8003","8004","8005","8006","8007"])
+        port = random.choice(["8000"])
         url = self.url.replace("8000", port)
         # url = self.url
         response = requests.post(url, headers=header, data=json.dumps(payload))
@@ -79,8 +79,18 @@ class VllmServer(Server):
             raise Exception("Server Error!")
 
     def chat_openai(self, query, system, context):
+        from openai import OpenAI
+        if self.client.api_key == "EMPTY":
+            port = random.choice(["8000"])
+            url = self.config["api_url"].replace("8000", port)
+            client = OpenAI(
+                api_key="EMPTY",
+                base_url=url,
+            )
+        else:
+            client = self.client
         messages = self.message_warpper(query, system, context)
-        output = self.client.chat.completions.create(
+        output = client.chat.completions.create(
             model=self.model_id,
             response_format={"type": "json_object"},
             messages=messages,

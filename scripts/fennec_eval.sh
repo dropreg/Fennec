@@ -17,4 +17,4 @@
 
 python src/auto_eval.py \
 -c scripts/gen_conf/fennec_bench_v2_gen.yaml \
--a -p 64 \
+-a -p 8 \

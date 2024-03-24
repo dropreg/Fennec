@@ -32,7 +32,7 @@ class DialogueGenAction(Action):
             eval_model,
             server,
             query=dialogue.get_query_by_idx(0)["content"],
-            system="",
+            system=None,
             context=meta_info['context'],
         )
         if isinstance(result, str):
