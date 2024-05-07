@@ -61,7 +61,7 @@ class VllmServer(Server):
         }
         
         header = {"Content-Type": "application/json"}
-        port = random.choice(["8000"])
+        port = random.choice(["8000", "8001", "8002", "8003", "8004", "8005", "8006", "8007"])
         url = self.url.replace("8000", port)
         # url = self.url
         response = requests.post(url, headers=header, data=json.dumps(payload))

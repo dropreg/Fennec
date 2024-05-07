@@ -27,6 +27,7 @@ class GPTServer(Server):
         context,
         temperature,
         top_p,
+        max_tokens,
     ):
         openai.api_base = self.api_url
         openai.api_key = self.api_key
@@ -37,12 +38,18 @@ class GPTServer(Server):
         response = openai.ChatCompletion.create(
             model=self.model_id,
             messages=messages,
-            n=1,
+            # n=1,
         )
         if "choices" in response and response["choices"] is None:
             output = ""
+            print(response)
+            raise Exception('Choices is None')
         else:
             output = response["choices"][0]["message"]["content"]
+        if output.strip().startswith("Requests to the ChatCompletions_Create Operation under Azure OpenAI API version"):
+            raise Exception('Azure OpenAI API failed')
+        if output.strip().startswith("Too many requests. Please try again later."):
+            raise Exception('Too many requests. Please try again later.')
         # except:
             # output = "server error"
 

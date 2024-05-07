@@ -21,12 +21,22 @@ autoj_bench:
       type: pairwise
       raw_file: data/fennec_train_data/raw/autoj/pairwise_traindata.jsonl
       format_file: data/fennec_train_data/format/autoj/pairwise_traindata.jsonl
-      db_file: data/db_file/dialogue/autoj_bench_pairwise_traindata.sqlite
+      db_file: data/db_file/dialogue/autoj_bench_pairwise_train.sqlite
     pairwise_test:
       type: pairwise
       raw_file: data/fennec_eval_data/raw/auto_j_eval_p/testdata_pairwise.jsonl
       format_file: data/fennec_eval_data/format/auto_j_eval_p/testdata_pairwise.jsonl
       db_file: data/db_file/dialogue/autoj_bench_testdata_pairwise.sqlite
+    fennec_v2:
+      type: pairwise
+      raw_file: data/fennec_train_data/raw/fennec_bench_v2/pairwise_data_0324_selected.jsonl
+      format_file: data/fennec_train_data/format/fennec_bench_v2/pairwise_data_0324_selected.jsonl
+      db_file: data/db_file/dialogue/fennec_bench_v2_pairwise_data_0324_selected.sqlite
+    fennec_v2_0331:
+      type: pairwise
+      raw_file: data/fennec_train_data/raw/fennec_bench_v2/pairwise_data_0331_selected.jsonl
+      format_file: data/fennec_train_data/format/fennec_bench_v2/pairwise_data_0331_selected.jsonl
+      db_file: data/db_file/dialogue/fennec_bench_v2_pairwise_data_0331_selected.sqlite
 
 pandalm_bench:
   name: "pandalm_bench"
@@ -72,6 +82,11 @@ correction_bench:
       raw_file: data/fennec_eval_data/raw/correction/
       format_file: data/fennec_eval_data/format/correction/alpaca13b_testdata.json
       db_file: data/db_file/dialogue/alpaca13b_correction_testdata.sqlite
+   autoj_test:
+      type: pairwise
+      raw_file: data/fennec_eval_data/raw/correction/autoj_correction.json
+      format_file: data/fennec_eval_data/format/correction/testdata_autoj_correction.json
+      db_file: data/db_file/dialogue/testdata_autoj_correction.sqlite
 
 system_rank:
   name: "system_rank"

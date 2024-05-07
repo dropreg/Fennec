@@ -34,7 +34,7 @@ def run(async_run, config_file, parallel_number, batchsize):
     db_server = DialogueAlchemyDatabase(db_name)
     handler = DialogueHandler(db_server)
     
-    dialogue_list = handler.load_all_dialogue()
+    dialogue_list = handler.load_all_dialogue()[3000:6000]
     logger.info("Load data = {} from {}".format(len(dialogue_list), db_name))
 
     eval_pipe = EvalPipe(auto_eval_config)

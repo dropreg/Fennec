@@ -11,6 +11,8 @@ task_func:
     - fennec_pairwise_solving
     - fennec_pairwise_merge
     - fennec_correction
+    # - fennec_branch_selection
+    - fennec_branch_quick_sort
   pairwise_single_eval_func:
     - fennec_branch
     - fennec_scoring
@@ -18,8 +20,13 @@ task_func:
     - fennec_pairwise_merge
     - fennec_correction
 
-train_parquet_file: data/eval_file/train.parquet
-train_filter_parquet_file: data/eval_file/filter.jsonl
+# train_parquet_file: data/eval_file/fennec_v2_0331_2.parquet
+# train_parquet_file: data/eval_file/fennec_v2_0418_1k_2k.parquet
+train_parquet_file: data/eval_file/fennec_v2_0418_2k_3k.parquet
+# train_parquet_file: data/eval_file/fennec_v2_0428_3k_6k.parquet
+# train_parquet_file: data/eval_file/fennec_v2_0418_zephyr_0424.parquet
+train_filter_parquet_file: data/eval_file/fennec_v2_0505_error_in_upper_limit.parquet
+# train_filter_parquet_file: data/eval_file/single_error_0413.parquet
 
 actions:
   fennec_branch:
@@ -48,6 +55,16 @@ actions:
     lang: en
     template_file: "conf/prompt_template/fennec_template.json"
   fennec_pairwise_single_solving:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_template.json"
+  fennec_branch_selection:
+    name: ""
+    description: ""
+    lang: en
+    template_file: "conf/prompt_template/fennec_template.json"
+  fennec_branch_quick_sort:
     name: ""
     description: ""
     lang: en

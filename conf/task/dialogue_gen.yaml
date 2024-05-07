@@ -3,6 +3,8 @@ task_func:
   gen_func:
     - dialogue_gen
 
+eval_json: data/eval_file/dialogue_generation_model.jsonl
+
 actions:
   dialogue_gen:
     name: ""

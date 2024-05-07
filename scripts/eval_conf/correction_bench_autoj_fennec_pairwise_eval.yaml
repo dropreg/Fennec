@@ -2,13 +2,13 @@
 
 # Dialogue Config
 dialogue_conf: conf/benchmark.yaml
-dialogue: correction_bench
-dialogue_dataset: autoj_test
+dialogue: autoj_bench
+dialogue_dataset: pairwise_test
 
 # Server Config
 server_conf: conf/server.yaml
 server: vllm
-model_id: fennec
+model_id: Qwen_72B_Chat
 
 # Task Config
 task_conf: conf/task.yaml
@@ -18,3 +18,6 @@ task_func: pairwise_eval_func
 # Eval Config
 eval_func: "evaluation"
 eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_{model_id}_{task_func}.sqlite
+# eval_db_file: data/db_file/eval/autoj_bench_pairwise_test_zephyr_7b_0426_pairwise_eval_func_selection_72b.sqlite
+
+# eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_zephyr_fennec_113_{task_func}_113criterion_0417judge.sqlite

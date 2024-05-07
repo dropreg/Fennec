@@ -13,6 +13,8 @@ from actions.fennec import (
     FennecPairwiseSolvingAction,
     FennecPairwiseMergeAction,
     FennecCorrectionAction,
+    FennecBranchSelectionAction,
+    FennecBranchQuickSortAction,
 )
 from config.task_config import TaskConfig
 from scipy.stats import kendalltau
@@ -68,6 +70,16 @@ class FennecEvaluation(Evaluation):
                 FennecPairwiseMergeAction.action_name,
                 str("turn{}".format(turn)),
             )
+            # fbs_action_feedback = eval_event.get_memories(
+            #     self.task_name,
+            #     FennecBranchSelectionAction.action_name,
+            #     str("turn{}".format(turn)),
+            # )
+            # fbqs_action_feedback = eval_event.get_memories(
+            #     self.task_name,
+            #     FennecBranchQuickSortAction.action_name,
+            #     str("turn{}".format(turn)),
+            # )
             
             judge = meta_info["judge"][0]
             # import pdb; pdb.set_trace()
@@ -80,9 +92,9 @@ class FennecEvaluation(Evaluation):
             #     str("turn{}".format(turn)),
             # )
             
-            # query = dialogue.get_query_by_idx(0)["content"]
-            # response_1 = dialogue.get_pairwise_response_by_idx(0, "model_a")["content"]
-            # response_2 = dialogue.get_pairwise_response_by_idx(0, "model_b")["content"]
+            query = dialogue.get_query_by_idx(0)["content"]
+            response_1 = dialogue.get_pairwise_response_by_idx(0, "model_a")["content"]
+            response_2 = dialogue.get_pairwise_response_by_idx(0, "model_b")["content"]
             # self.correction[meta_info['question_id']] = {
             #     "query": query,
             #     "response_1": response_1,
@@ -93,7 +105,17 @@ class FennecEvaluation(Evaluation):
             #     "score_1": fpm_action_feedback["model_a"],
             #     "score_2": fpm_action_feedback["model_b"],
             # }
-
+            if "error" not in self.eval_gen:
+                self.eval_gen["error"] = 0
+                self.eval_gen["server_error"] = 0
+                self.eval_gen["count"] = 0
+                self.eval_gen["collect"] = []
+                self.eval_gen["table"] = None
+                self.eval_gen["aggrement"] = []
+                self.eval_gen["win"] = 0
+                self.eval_gen["lose"] = 0
+                self.eval_gen["tie"] = 0
+                
             if isinstance(judge, str):
                 if judge == "model_a":
                     judge = 0
@@ -114,6 +136,10 @@ class FennecEvaluation(Evaluation):
                 self.eval_score["agreement"] = []
                 self.eval_score["consistency"] = []
                 self.eval_score["single_agreement"] = []
+                self.eval_score["selected_single_agreement"] = []
+                self.eval_score["selected_win"] = 0
+                self.eval_score["selected_lose"] = 0
+                self.eval_score["selected_tie"] = 0
                 self.eval_score["error"] = 0
                 self.eval_score["hit"] = 0
 
@@ -150,9 +176,9 @@ class FennecEvaluation(Evaluation):
                 self.eval_score["tie"] += 1
                 # pdb.set_trace()
 
-            if judge == 2:
-                return
-
+            # if judge == 2:
+            #     return
+            save = False
             if (
                 fpm_action_feedback["model_a"] > fpm_action_feedback["model_b"]
                 and judge == 0
@@ -170,6 +196,58 @@ class FennecEvaluation(Evaluation):
                 self.eval_score["single_agreement"].append(1)
             else:
                 self.eval_score["single_agreement"].append(0)
+                save = True
+                
+            # if (
+            #     sum(fbs_action_feedback["rating_a"]) > sum(fbs_action_feedback["rating_b"])
+            #     and judge == 0
+            # ):
+            #     self.eval_score["selected_single_agreement"].append(1)
+            # elif (
+            #     sum(fbs_action_feedback["rating_a"]) < sum(fbs_action_feedback["rating_b"])
+            #     and judge == 1
+            # ):
+            #     self.eval_score["selected_single_agreement"].append(1)
+            # elif (
+            #     sum(fbs_action_feedback["rating_a"]) == sum(fbs_action_feedback["rating_b"])
+            #     and judge == 2
+            # ):
+            #     self.eval_score["selected_single_agreement"].append(1)
+            # else:
+            #     self.eval_score["selected_single_agreement"].append(0)
+                
+            # if sum(fbs_action_feedback["rating_a"]) > sum(fbs_action_feedback["rating_b"]):
+            #     self.eval_score["selected_win"] += 1
+            # elif sum(fbs_action_feedback["rating_a"]) < sum(fbs_action_feedback["rating_b"]):
+            #     self.eval_score["selected_lose"] += 1
+            # elif sum(fbs_action_feedback["rating_a"]) == sum(fbs_action_feedback["rating_b"]):
+            #     self.eval_score["selected_tie"] += 1
+            
+            # topk = 1
+            # if (
+            #     sum(fbqs_action_feedback["rating_a"][:topk]) > sum(fbqs_action_feedback["rating_b"][:topk])
+            #     and judge == 0
+            # ):
+            #     self.eval_score["selected_single_agreement"].append(1)
+            # elif (
+            #     sum(fbqs_action_feedback["rating_a"][:topk]) < sum(fbqs_action_feedback["rating_b"][:topk])
+            #     and judge == 1
+            # ):
+            #     self.eval_score["selected_single_agreement"].append(1)
+            # elif (
+            #     sum(fbqs_action_feedback["rating_a"][:topk]) == sum(fbqs_action_feedback["rating_b"][:topk])
+            #     and judge == 2
+            # ):
+            #     self.eval_score["selected_single_agreement"].append(1)
+            # else:
+            #     self.eval_score["selected_single_agreement"].append(0)
+                
+            # if sum(fbqs_action_feedback["rating_a"][:topk]) > sum(fbqs_action_feedback["rating_b"][:topk]):
+            #     self.eval_score["selected_win"] += 1
+            # elif sum(fbqs_action_feedback["rating_a"][:topk]) < sum(fbqs_action_feedback["rating_b"][:topk]):
+            #     self.eval_score["selected_lose"] += 1
+            # elif sum(fbqs_action_feedback["rating_a"][:topk]) == sum(fbqs_action_feedback["rating_b"][:topk]):
+            #     self.eval_score["selected_tie"] += 1
 
             no_skip = False
             if (
@@ -206,11 +284,12 @@ class FennecEvaluation(Evaluation):
                     self.eval_score["agreement"].append(0)
                 self.eval_score["consistency"].append(1)
             else:
-                if (
-                    fpm_action_feedback["model_a"] == 0
-                    or fpm_action_feedback["model_b"] == 0
-                ):
-                    self.eval_score["error"] += 1
+                # if (
+                #     fpm_action_feedback["model_a"] == 0
+                #     or fpm_action_feedback["model_b"] == 0
+                # ):
+                #     self.eval_score["error"] += 1
+                # import pdb;pdb.set_trace()
                 self.eval_score["consistency"].append(0)
                 self.eval_score["agreement"].append(0)
             
@@ -220,6 +299,39 @@ class FennecEvaluation(Evaluation):
             #         "query": query,
             #         "judge": judge,
             #     }
+            # import pdb;pdb.set_trace()
+            correction_1 = ""
+            correction_2 = ""
+            # import pdb;pdb.set_trace()
+            new_data = pd.DataFrame(
+                {
+                    "idx": [meta_info["question_id"]],
+                    "query": [query],
+                    "judge": [meta_info["judge"][0]],
+                    "rating_a": [fps_action_feedback['rating_a']],
+                    "rating_b": [fps_action_feedback['rating_b']],
+                    "response_1": [response_1],
+                    "response_2": [response_2],
+                    "branch": [fb_action_feedback["branch_list"]],
+                    "branch_text": [fb_action_feedback["result"]],
+                    "scoring": [fs_action_feedback["result"]],
+                    "solving": [fps_action_feedback["result"]],
+                    "correction_1": [correction_1],
+                    "correction_2": [correction_2],
+                    "context": [meta_info["context"]] if "context" in meta_info and meta_info["context"] else [[""]],
+                    # "selection": [fbs_action_feedback]
+                }
+            )
+            # import pdb;pdb.set_trace()
+            if save:
+            # if True:
+                table = pa.Table.from_pandas(new_data)
+                if self.eval_gen["table"] is None:
+                    self.eval_gen["table"] = table
+                else:
+                    self.eval_gen["table"] = pa.concat_tables(
+                        [self.eval_gen["table"], table]
+                    )
         elif self.task_func == "pairwise_single_eval_func":
 
             meta_info = dialogue.get_meta_info()
@@ -309,16 +421,11 @@ class FennecEvaluation(Evaluation):
                 FennecPairwiseSolvingAction.action_name,
                 str("turn{}".format(turn)),
             )
-            fps_action_feedback = eval_event.get_memories(
-                self.task_name,
-                FennecPairwiseSolvingAction.action_name,
-                str("turn{}".format(turn)),
-            )
-            fc_action_feedback = eval_event.get_memories(
-                self.task_name,
-                FennecCorrectionAction.action_name,
-                str("turn{}".format(turn)),
-            )
+            # fc_action_feedback = eval_event.get_memories(
+            #     self.task_name,
+            #     FennecCorrectionAction.action_name,
+            #     str("turn{}".format(turn)),
+            # )
 
             if "error" not in self.eval_gen:
                 self.eval_gen["error"] = 0
@@ -327,6 +434,9 @@ class FennecEvaluation(Evaluation):
                 self.eval_gen["collect"] = []
                 self.eval_gen["table"] = None
                 self.eval_gen["aggrement"] = []
+                self.eval_gen["win"] = 0
+                self.eval_gen["lose"] = 0
+                self.eval_gen["tie"] = 0
 
             if (
                 len(fb_action_feedback["branch_list"]) == 0
@@ -341,71 +451,92 @@ class FennecEvaluation(Evaluation):
                 + fs_action_feedback["result"]
                 + fps_action_feedback["result"]
             ):
-                if r == "" or "" == "server error":
+                if r == "" or r == "server error":
                     self.eval_gen["error"] += 1
                 
-            with write_lock:
-                judge = meta_info["judge"][0]
-                if (
-                    sum(fps_action_feedback["rating_a"])
-                    > sum(fps_action_feedback["rating_b"])
-                    and judge == 0
-                ):
-                    self.eval_gen["aggrement"].append(1)
-                elif (
-                    sum(fps_action_feedback["rating_a"])
-                    < sum(fps_action_feedback["rating_b"])
-                    and judge == 1
-                ):
-                    self.eval_gen["aggrement"].append(1)
-                elif (
-                    sum(fps_action_feedback["rating_a"])
-                    == sum(fps_action_feedback["rating_b"])
-                    and judge == 2
-                ):
-                    self.eval_gen["aggrement"].append(1)
-                else:
-                    self.eval_gen["aggrement"].append(0)
+            # with write_lock:
+            #     judge = meta_info["judge"][0]
+            #     if (
+            #         sum(fps_action_feedback["rating_a"])
+            #         > sum(fps_action_feedback["rating_b"])
+            #         and judge == 0
+            #     ):
+            #         self.eval_gen["aggrement"].append(1)
+            #     elif (
+            #         sum(fps_action_feedback["rating_a"])
+            #         < sum(fps_action_feedback["rating_b"])
+            #         and judge == 1
+            #     ):
+            #         self.eval_gen["aggrement"].append(1)
+            #     elif (
+            #         sum(fps_action_feedback["rating_a"])
+            #         == sum(fps_action_feedback["rating_b"])
+            #         and judge == 2
+            #     ):
+            #         self.eval_gen["aggrement"].append(1)
+            #     else:
+            #         self.eval_gen["aggrement"].append(0)
 
-                if (
-                    0 in fps_action_feedback["rating_a"]
-                    or 0 in fps_action_feedback["rating_b"]
-                ):
-                    self.eval_gen["error"] += 1
-                    return
+            #     if (
+            #         0 in fps_action_feedback["rating_a"]
+            #         or 0 in fps_action_feedback["rating_b"]
+            #     ):
+            #         self.eval_gen["error"] += 1
+            #         return
                 
-                # pdb.set_trace()
-                correction_1 = ""
-                correction_2 = ""
-                if "result_a" in fc_action_feedback:
-                    correction_1 = fc_action_feedback['result_a']
-                if "result_b" in fc_action_feedback:
-                    correction_2 = fc_action_feedback['result_b']
-        
-                new_data = pd.DataFrame(
-                    {
-                        "query": [query],
-                        "judge": [meta_info["judge"][0]],
-                        "rating_a": [fps_action_feedback['rating_a']],
-                        "rating_b": [fps_action_feedback['rating_b']],
-                        "response_1": [response_1],
-                        "response_2": [response_2],
-                        "branch": [fb_action_feedback["branch_list"]],
-                        "scoring": [fs_action_feedback["result"]],
-                        "solving": [fps_action_feedback["result"]],
-                        "correction_1": [correction_1],
-                        "correction_2": [correction_2],
-                    }
+            # pdb.set_trace()
+            correction_1 = ""
+            correction_2 = ""
+            # if "result_a" in fc_action_feedback:
+            #     correction_1 = fc_action_feedback['result_a']
+            # if "result_b" in fc_action_feedback:
+            #     correction_2 = fc_action_feedback['result_b']
+            print(meta_info['question_id'])
+            new_data = pd.DataFrame(
+                {
+                    "query": [query],
+                    "judge": [meta_info["judge"][0]],
+                    "rating_a": [fps_action_feedback['rating_a']],
+                    "rating_b": [fps_action_feedback['rating_b']],
+                    "response_1": [response_1],
+                    "response_2": [response_2],
+                    "branch": [fb_action_feedback["branch_list"]],
+                    "branch_text": [fb_action_feedback["result"]],
+                    "scoring": [fs_action_feedback["result"]],
+                    "solving": [fps_action_feedback["result"]],
+                    "correction_1": [correction_1],
+                    "correction_2": [correction_2],
+                    "context": [meta_info["context"]] if meta_info["context"] else [[""]]
+                }
+            )
+            if sum(new_data["rating_a"][0][:]) > sum(new_data["rating_b"][0][:]):
+                self.eval_gen["win"] += 1
+            elif sum(new_data["rating_a"][0][:]) < sum(new_data["rating_b"][0][:]):
+                self.eval_gen["lose"] += 1
+            else:
+                self.eval_gen["tie"] += 1
+            # max_abs = 1
+            # flag = 0
+            # for i in range(5):
+            #     if abs(new_data["rating_a"][0][i] - new_data["rating_b"][0][i]) > max_abs:
+            #         max_abs = abs(new_data["rating_a"][0][i] - new_data["rating_b"][0][i])
+            #         flag = 1 if new_data["rating_a"][0][i] > new_data["rating_b"][0][i] else -1
+            # if flag == 0:
+            #     self.eval_gen["tie"] += 1
+            # elif flag == 1:
+            #     self.eval_gen["win"] += 1
+            # else:
+            #     self.eval_gen["lose"] += 1
+                
+            table = pa.Table.from_pandas(new_data)
+            if self.eval_gen["table"] is None:
+                self.eval_gen["table"] = table
+            else:
+                self.eval_gen["table"] = pa.concat_tables(
+                    [self.eval_gen["table"], table]
                 )
-                table = pa.Table.from_pandas(new_data)
-                if self.eval_gen["table"] is None:
-                    self.eval_gen["table"] = table
-                else:
-                    self.eval_gen["table"] = pa.concat_tables(
-                        [self.eval_gen["table"], table]
-                    )
 
-                # pdb.set_trace()
+            # pdb.set_trace()
 
     def serialize(self):
         if len(self.eval_score):
@@ -455,8 +586,24 @@ class FennecEvaluation(Evaluation):
                             str(len(consistency) - self.eval_score["error"]),
                         )
                     )
-                
+                if "selected_single_agreement" in self.eval_score:
+                    selected_single_agreement = self.eval_score["selected_single_agreement"]
+                    self.logger.info(
+                        "Selected Single Agreement Average Score = {} = {} / {}".format(
+                            str(
+                                sum(selected_single_agreement)
+                                / (len(selected_single_agreement) - self.eval_score["error"])
+                            ),
+                            str(sum(selected_single_agreement)),
+                            str(len(selected_single_agreement) - self.eval_score["error"]),
+                        )
+                    )
+                    self.logger.info("selected win: {}, lose: {}, tie: {}".format(str(self.eval_score["selected_win"]),
+                                                                     str(self.eval_score["selected_lose"]),
+                                                                     str(self.eval_score["selected_tie"])
+                                                                     ))
                 # print(len(self.eval_filter_gen))
+                pq.write_table(self.eval_gen["table"], self.train_filter_parquet_file)
                 # json.dump(self.eval_filter_gen, open(self.train_filter_parquet_file, 'w'))
                 # json.dump(self.correction, open("correction_llama2_7bchat_test.json", 'w'))
             elif self.task_func == "pairwise_single_eval_func":
@@ -487,6 +634,11 @@ class FennecEvaluation(Evaluation):
                 
                 self.logger.info("Table size = {}".format(len(self.eval_gen["table"])))
                 pq.write_table(self.eval_gen["table"], self.train_parquet_file)
+                
+                self.logger.info("win: {}, lose: {}, tie: {}".format(str(self.eval_gen["win"]),
+                                                                     str(self.eval_gen["lose"]),
+                                                                     str(self.eval_gen["tie"])
+                                                                     ))
 
                 aggrement = self.eval_gen["aggrement"]
                 self.logger.info(

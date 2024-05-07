@@ -11,4 +11,4 @@
 
 # python src/prepare_bench.py -c conf/benchmark.yaml -b metatool_bench
 
-python src/prepare_bench.py -c conf/benchmark.yaml -b fennec_bench_v2
+python src/prepare_bench.py -c conf/benchmark.yaml -b autoj_bench

@@ -45,7 +45,54 @@ class AutoJbench(Bench):
                 json_data = json.loads(line)
 
                 if data_type == "pairwise":
-                    if "train" in format_file:
+                    if "fennec_bench_v2" in format_file:
+                        meta_info = {
+                            "question_id": line_idx,
+                            "model_a": json_data["model_1"],
+                            "model_b": json_data["model_2"],
+                            "category": json_data["source_file"],
+                            "judge": [""],
+                            "judge_type": "pairwise",
+                            "judgment": [""],
+                            "turn": 1,
+                            "score": "",
+                            "context": json_data["context"],
+                        }
+
+                        conversation_a = [
+                            {
+                                "content": self.filter(json_data["query"]),
+                                "role": "user",
+                            },
+                            {
+                                "content": self.filter(json_data["response_1"]),
+                                "role": "assistant",
+                            },
+                        ]
+                        conversation_b = [
+                            {
+                                "content": self.filter(json_data["query"]),
+                                "role": "user",
+                            },
+                            {
+                                "content": self.filter(json_data["response_2"]),
+                                "role": "assistant",
+                            },
+                        ]
+
+                        meta_info.update({"reference": []})
+                        fw.writelines(
+                            json.dumps(
+                                {
+                                    "meta_info": meta_info,
+                                    "conversation_a": conversation_a,
+                                    "conversation_b": conversation_b,
+                                },
+                                ensure_ascii=False,
+                            )
+                            + "\n"
+                        )
+                    elif "train" in format_file:
                         meta_info = {
                             "question_id": line_idx,
                             "model_a": json_data["source_dataset"],

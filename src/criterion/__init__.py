@@ -6,3 +6,4 @@ from .fennec import *
 from .fennec_reverse import *
 from .prometheus_eval import *
 from .tool_awareness import *
+from .dialogue_gen import *

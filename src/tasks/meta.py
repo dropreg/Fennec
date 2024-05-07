@@ -56,7 +56,40 @@ class Task(ABC):
         action_feedback_dict = self.handler.load_action_feedback(
             session_id, self.task_name, action_name
         )
-
+        # if action_feedback_dict and turn_idx in action_feedback_dict:
+        #     r = action_feedback_dict[turn_idx]['result']
+        #     if isinstance(r, list):
+        #         force = True
+            
+        # if action_feedback_dict and turn_idx in action_feedback_dict:
+        #     r = action_feedback_dict[turn_idx]['result']
+        #     if isinstance(r, list):
+        #         if len(r) == 0:
+        #             force = True
+        #             print('forced {}: {} ....'.format(action_name, str(action_feedback_dict[turn_idx])))
+        #             # import pdb;pdb.set_trace()
+        #         for s in r:
+        #             if s == '':
+        #                 force = True
+        #                 print('forced {}: {} ....'.format(action_name, str(action_feedback_dict[turn_idx])))
+        #     else:
+        #         if r == '':
+        #         # import pdb;pdb.set_trace()
+        #             force = True
+        #             print('forced {}: {} ....'.format(action_name, str(action_feedback_dict[turn_idx])))
+                
+        #     if isinstance(r, list):
+        #         for s in r:
+        #             if s.strip().startswith('Requests to the ChatCompletions_Create Operation under Azure OpenAI API') or s.strip().startswith('Too many requests. Please try again later.'):
+        #                 force = True
+        #                 print('forced {}: {} ....'.format(action_name, s))
+        #                 # import pdb;pdb.set_trace()
+        #                 break
+        #     else:
+        #         if r.strip().startswith('Requests to the ChatCompletions_Create Operation under Azure OpenAI API') or r.strip().startswith('Too many requests. Please try again later.'):
+        #             force = True
+        #             print('forced {}: {} ....'.format(action_name, r))
+        #             # import pdb;pdb.set_trace()
         if (
             force
             or action_feedback_dict is None

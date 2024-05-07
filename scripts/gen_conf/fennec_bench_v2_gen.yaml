@@ -8,7 +8,7 @@ dialogue_dataset: dialogue_gen
 # Server Config
 server_conf: conf/server.yaml
 server: vllm
-model_id: Mixtral_8x7B
+model_id: mistral
 
 # Task Config
 task_conf: conf/task.yaml

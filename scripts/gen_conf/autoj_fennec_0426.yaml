@@ -10,8 +10,8 @@ dialogue_dataset: fennec_v2_0331
 # server: gpt
 # model_id: one_chat
 server_conf: conf/server.yaml
-server: gpt
-model_id: one_chat
+server: vllm
+model_id: zephyr_7b_0504
 
 # Task Config
 task_conf: conf/task.yaml
@@ -22,5 +22,5 @@ task_func: pairwise_gen_func
 eval_func: "generation"
 # eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_{model_id}_{task_func}_0411_2_claude.sqlite
 # eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_{model_id}_{task_func}_0411_2.sqlite
-eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_{model_id}_{task_func}_0418.sqlite
-
+eval_db_file: data/db_file/eval/{dialogue}_{dialogue_dataset}_{model_id}_{task_func}_0506.sqlite
+# eval_db_file: data/db_file/eval/autoj_bench_fennec_v2_0331_zephyr_7b_0424_pairwise_gen_func_0418.sqlite
